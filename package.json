@@ -1,4 +1,32 @@
 {
   "name": "BookListChecker",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "description": "the app helps to manage your books for 365 Challendge",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/al6mina/books-todo.git"
+  },
+  "main":"index.js",
+  "author": "Albina Kremlovska",
+  "license": "MIT",
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack --watch",
+    "start": "webpack-dev-server",
+    "build": "./node_modules/.bin/webpack --config=webpack.build.config.js"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^2.29.0",
+    "path": "^0.12.7",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "redux": "^3.7.2",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1"
+  }
 }
