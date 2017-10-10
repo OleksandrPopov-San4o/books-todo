@@ -1,12 +1,12 @@
 import React from 'react';
 import { Component } from 'react';
-import Nav from './NavComponent/NavComponent.jsx'
+import Navigation from './components/Nav/NavComponent.jsx'
 
 export default class App extends Component {
     render() {
         return (
             <div>
-                <Nav/>
+                <Navigation/>
                 <h1>Hello World!!! {this.props.name}</h1>
             </div>
         );

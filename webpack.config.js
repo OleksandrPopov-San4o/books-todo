@@ -24,11 +24,9 @@ let config = {
             {
                 test: /(\.jsx|\.js)$/,
                 loader: 'babel-loader',
-                //query: {
-                //    presets: ['react','env']
-                //},
                 exclude: /(node_modules|bower_components)/
-            }
+            },
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
         ]
     },
     plugins: [HtmlWebpackPluginConfig]
