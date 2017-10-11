@@ -12,7 +12,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 let config = {
     entry: {
-        'app': './src/index.js'
+        'app': './src/index.jsx'
     },
     devtool: 'source-map',
     output: {
