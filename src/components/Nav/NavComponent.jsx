@@ -1,20 +1,21 @@
 import React from 'react';
 import { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
-const navs = ['home', 'books', 'My lists'];
+const navs = [{Home: '/'}, {Books:'/books'}, {'My lists':'/lists'}];
 
 export default class Navigation extends Component {
     render() {
-        const listItems = navs.map((nav) =>
-            <NavItem key={nav}>
-                <NavLink href="#">{nav}</NavLink>
-            </NavItem>
-        );
+        const listItems = navs.map(nav => {
+            let arr = Object.entries(nav)[0];
+            let [k, val] = [arr[0], arr[1]];
 
-        return (
-            <Nav pills>{listItems}</Nav>
-        );
-
-    }
+            return <NavItem key={k}>                
+                      <Link to={val}>{k}</Link>                
+                  </NavItem>
+        });
+        
+        return (<Nav pills>{listItems}</Nav>);
+    }    
 }

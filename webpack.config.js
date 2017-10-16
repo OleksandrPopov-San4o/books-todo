@@ -29,7 +29,11 @@ let config = {
             { test: /\.css$/, loader: 'style-loader!css-loader' },
         ]
     },
-    plugins: [HtmlWebpackPluginConfig]
+    plugins: [HtmlWebpackPluginConfig],
+    devServer: {    
+    inline: true,    
+    historyApiFallback: true,
+},
 
 };
 

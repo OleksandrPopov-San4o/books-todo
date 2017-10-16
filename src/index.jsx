@@ -1,13 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Container, Row, Col} from 'reactstrap';
 import Header from './components/Header/HeaderComponent.jsx';
 import Footer from './components/Footer/FooterComponent.jsx';
+import Home from './components/Home/HomeComponent.jsx';
+import BooksList from './components/Books/BooksListComponent.jsx';
+import UserLists from './components/Lists/ListComponent.jsx';
+
+require ('./main.css')
 
 ReactDOM.render (
-    <div className="container">
-        <Header/>
-        <main><h1>Hello World!!!</h1></main>
-        <Footer/>
-    </div>,
+    <BrowserRouter>
+        <Container>
+            <Row>
+                <Col xs="12">
+                    <Header/>
+                </Col>
+                <Col xs="12"> 
+                    <main>
+                        <Switch>
+                            <Route exact path="/" component={Home}/>
+                            <Route path="/books" component={BooksList}/>
+                            <Route path="/lists" component={UserLists}/>
+                        </Switch>
+                    </main>
+                </Col>
+                <Col xs="12"> 
+                    <Footer/>
+                </Col>
+            </Row>
+        </Container>
+    </BrowserRouter>,
     document.getElementById('app'));
+
