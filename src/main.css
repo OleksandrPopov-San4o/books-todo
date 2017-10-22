@@ -1,4 +1,16 @@
+.main-content {
+    diaplay: flex;
+    flex-direction: column;
+   
+}
 .component-header {
     padding: 10px;
     background-color: lightgreen;
+}
+.active {
+    text-decoration: underline;
+}
+.no-link {
+    text-decoration: none;
+    color: #fff;
 }

@@ -1,61 +1,54 @@
 import React from 'react';
 import { Component } from 'react';
+import { Switch, Route, NavLink} from 'react-router-dom';
 import {ListGroup, ListGroupItem, Button, Row, Col} from 'reactstrap';
-import BookItem from '../BookItem/BookItemComponent.jsx';
+import BookListItem from './BookListItemComponent.jsx';
+import Book from './BookComponent.jsx';
+import NewBook from './NewBookComponent.jsx'
 import StatusFilter from '../Filter/StatusFilterComponent.jsx';
+import MockedData from '../../MockedData.js';
+
 
 require('./booklist.css');
 
-const booksMocked = [{
-    title: 'Atlas Shrugged ',
-    author: 'Ayn Rand',
-    status: 3,
-    id: 1
-},{
-    title: 'Anthem',
-    author: 'Ayn Rand',
-    status: 1,
-    id: 2
-}, {
-    title: 'American Gods',
-    author: 'Neil Gaiman',
-    status: 3,
-    id: 3
-}, {
-    title: 'Coraline ',
-    author: 'Neil Gaiman',
-    status: 1,
-    id: 4
-},{
-    title: 'A Hat Full of Sky',
-    author: 'Terry Patchett',
-    status: 2,
-    id: 4
-}];
+const booksMocked = new MockedData().getAllBooks();
 
-export default class BooksList extends Component {
-    render() {
-        const listItems = booksMocked.map((book, index) =>  
+class ExactList extends Component{
+     render() {
+    const listItems = booksMocked.map((book, index) =>  
             <ListGroupItem key={index}>
-                <BookItem {...book}/>
+                <BookListItem {...book}/>
             </ListGroupItem>
-        );            
-       
-        return (
-            <div className="book-list">
+        );      
+   return ( <div className="book-list">
                 <Row>
                     <Col xs="12"> 
                         <h3 className="component-header">Books</h3>   
                     </Col>  
                     <Col xs="12" className="align-right">                   
-                        <Button color="primary">Add new book</Button>
+                        <Button color="primary">
+                            <NavLink exact={true} className="no-link" to={"/books/create"}>Add new book</NavLink>
+                        </Button>
                     </Col>
                     <Col xs="12">
                         <StatusFilter filters={Object.keys(booksMocked[0])} />                                                       
                         <ListGroup className="book-list-items">{listItems}</ListGroup>
                     </Col>
                 </Row>
-            </div>           
+    </div> ); 
+     }     
+}
+
+export default class BooksList extends Component {
+    render() {             
+       
+        return (
+             <Switch>
+                <Route exact path='/books' component={ExactList}/>
+                <Route exact path='/books/create' component={NewBook}/>
+                <Route exact path='/books/:number' component={Book}/>
+                
+            </Switch>                
         );
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { Nav, NavItem} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const navs = [{Home: '/'}, {Books:'/books'}, {'My lists':'/lists'}];
 
@@ -12,7 +12,7 @@ export default class Navigation extends Component {
             let [k, val] = [arr[0], arr[1]];
 
             return <NavItem key={k}>                
-                      <Link to={val}>{k}</Link>                
+                      <NavLink exact={true} activeClassName="active" to={val}>{k}</NavLink>               
                   </NavItem>
         });
         

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Container, Row, Col} from 'reactstrap';
 import Header from './components/Header/HeaderComponent.jsx';
@@ -8,18 +8,20 @@ import Footer from './components/Footer/FooterComponent.jsx';
 import Home from './components/Home/HomeComponent.jsx';
 import BooksList from './components/Books/BooksListComponent.jsx';
 import UserLists from './components/Lists/ListComponent.jsx';
+import createBrowserHistory from 'history/createBrowserHistory'
 
-require ('./main.css')
+require ('./main.css');
+const history = createBrowserHistory()
 
 ReactDOM.render (
-    <BrowserRouter>
+    <Router history={history}>
         <Container>
             <Row>
                 <Col xs="12">
                     <Header/>
                 </Col>
                 <Col xs="12"> 
-                    <main>
+                    <main className="main-content">
                         <Switch>
                             <Route exact path="/" component={Home}/>
                             <Route path="/books" component={BooksList}/>
@@ -32,6 +34,6 @@ ReactDOM.render (
                 </Col>
             </Row>
         </Container>
-    </BrowserRouter>,
+    </Router>,
     document.getElementById('app'));
 
