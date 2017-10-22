@@ -25,6 +25,7 @@ const booksMocked = [{
     id: 4
 }];
 // localstorage should be added 
+// autoupdate with redux
 
 class MockedBooks {
     getAllBooks () {

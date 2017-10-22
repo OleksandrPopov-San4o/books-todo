@@ -20,8 +20,8 @@ ReactDOM.render (
                 <Col xs="12">
                     <Header/>
                 </Col>
-                <Col xs="12"> 
-                    <main className="main-content">
+                <Col xs="12" className="main-content"> 
+                    <main>
                         <Switch>
                             <Route exact path="/" component={Home}/>
                             <Route path="/books" component={BooksList}/>

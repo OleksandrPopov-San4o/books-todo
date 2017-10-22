@@ -9,8 +9,10 @@ export default class Book extends Component {
 
         return (
              <Row className="book-item">
-                <Col xs="12"><h2>{book.title}</h2></Col>
-                <Col xs="12"> by {book.author}</Col>
+                <Col xs="12"> 
+                    <h3 className="component-header text-center">{book.title}</h3>
+                    <p>by {book.author}</p>  
+                </Col>                
                 <Col xs="12">Here should be some desc, image, rate etc</Col>
             </Row>         
         )

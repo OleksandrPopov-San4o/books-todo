@@ -27,7 +27,7 @@ class ExactList extends Component{
                     </Col>  
                     <Col xs="12" className="align-right">                   
                         <Button color="primary">
-                            <NavLink exact={true} className="no-link" to={"/books/create"}>Add new book</NavLink>
+                            <NavLink className="no-link" to={"/books/create"}>Add new book</NavLink>
                         </Button>
                     </Col>
                     <Col xs="12">
@@ -44,10 +44,9 @@ export default class BooksList extends Component {
        
         return (
              <Switch>
-                <Route exact path='/books' component={ExactList}/>
-                <Route exact path='/books/create' component={NewBook}/>
-                <Route exact path='/books/:number' component={Book}/>
-                
+                <Route exact path='/books/' component={ExactList}/>
+                <Route path='/books/create' component={NewBook}/>
+                <Route path='/books/:number' component={Book}/>                
             </Switch>                
         );
     }
