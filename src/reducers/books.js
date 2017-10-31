@@ -1,11 +1,16 @@
-const books = (state = [], action) => {
-    switch (action.type) {
+import MockedData from '../MockedData.js';
+
+
+const books = (state = new MockedData().getAllBooks(), action) => {
+    console.log('action', action)
+    switch (action.type) {      
         case 'ADD_BOOK':
             return [
                 ...state,
                 {
-                    id: action.id,
-                    book: action.book,
+                    id: state.length,
+                    title: action.book.title,
+                    author: action.book.author,
                     status: 1
                 }
             ]
@@ -23,3 +28,5 @@ const books = (state = [], action) => {
 }
 
 export default books
+
+export const getBook = state => state.filter(book => book.id === state.id)

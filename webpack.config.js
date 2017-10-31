@@ -18,6 +18,7 @@ let config = {
     output: {
         path: __dirname + '/build',
         filename: 'app.js',
+        publicPath: '/'
     },
     module: {
         loaders: [
@@ -25,12 +26,20 @@ let config = {
                 test: /(\.jsx|\.js)$/,
                 loader: 'babel-loader',
                 exclude: /(node_modules|bower_components)/
-            },
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            }, { 
+                test: /\.css$/, 
+                loader: 'style-loader!css-loader'
+            }, { 
+                test: /\.(png|jpg|jpeg)$/, 
+                loader: 'url-loader?name=build/images/[name].[ext]'}
+
         ]
     },
-    plugins: [HtmlWebpackPluginConfig]
-
+    plugins: [HtmlWebpackPluginConfig],
+    devServer: {    
+        inline: true,    
+        historyApiFallback: true,
+    }
 };
 
 module.exports = config;

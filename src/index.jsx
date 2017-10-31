@@ -2,19 +2,44 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import bookApp from './reducers'
+import bookApp from './reducers';
+import {Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Container, Row, Col} from 'reactstrap';
 import Header from './components/Header/HeaderComponent.jsx';
 import Footer from './components/Footer/FooterComponent.jsx';
+import Home from './components/Home/HomeComponent.jsx';
+import BooksList from './components/Books/BooksListComponent.jsx';
+import UserLists from './components/Lists/ListComponent.jsx';
+import createBrowserHistory from 'history/createBrowserHistory'
 
+require ('./main.css');
+const history = createBrowserHistory();
 let store = createStore(bookApp)
 
 ReactDOM.render (
     <Provider store={store}>
-        <div className="container">
-            <Header/>
-            <main><h1>Hello World!!!</h1></main>
-            <Footer/>
-        </div>
+        <Router history={history}>
+            <Container>
+                <Row>
+                    <Col xs="12">
+                        <Header/>
+                    </Col>
+                    <Col xs="12" className="main-content">
+                        <main>
+                            <Switch>
+                                <Route exact path="/" component={Home}/>
+                                <Route path="/books" component={BooksList}/>
+                                <Route path="/lists" component={UserLists}/>
+                            </Switch>
+                        </main>
+                    </Col>
+                    <Col xs="12">
+                        <Footer/>
+                    </Col>
+                </Row>
+            </Container>
+        </Router>
     </Provider>,
     document.getElementById('app'));
+

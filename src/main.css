@@ -1,0 +1,35 @@
+.container {
+    flex-grow: 1;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.container > .row {
+    flex-grow: 1;
+    height: 100%;
+    flex-direction: column;
+}
+.main-content {
+    flex-grow: 1;
+    height: 100%;
+   
+}
+.component-header {
+    padding: 10px;
+    background-color: lightgreen;
+}
+.books-carousel {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.active {
+    text-decoration: underline;
+}
+.no-link {
+    text-decoration: none;
+    color: #fff;
+}
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
