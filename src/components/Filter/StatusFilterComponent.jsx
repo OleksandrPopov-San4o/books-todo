@@ -1,23 +1,24 @@
 import React from 'react';
 import {Component} from 'react';
 import {Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupButton, Input, Button} from 'reactstrap';
+import { connect } from 'react-redux';
+import { setVisibilityFilter } from '../../actions';
 
+const possiblefilters = [
+    {val:'Show All', id:0},
+    {val: 'Not started', id:1},
+    {val :'In progress', id:2},
+    {val: 'Finished', id:3}];
 
-const possiblefilters = ['Show all', 'not started','in progress', 'read'];
-
-export default class BooksFilter extends Component {
+class BooksFilter extends Component {
     constructor(props) {
-    super(props);
+        super(props);
 
-    console.log(this)
-
-    this.toggle = this.toggle.bind(this);
-    //this.setFilter = this.setFilter.;
-
-    this.state = {
-      dropdownOpen: false,
-      filter: ''
-    };
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            dropdownOpen: false,
+            filter: ''
+        };
   }
 
   toggle() {
@@ -26,19 +27,17 @@ export default class BooksFilter extends Component {
     });
   }
   setFilter(item) {
-      console.log(item)
-      this.setState({
-        filter: item
-    });
+      this.props.dispatch(setVisibilityFilter(item));
+      
   }
     render() {
-         const dropdownItems = possiblefilters.map(item => <DropdownItem key={item} onClick={this.setFilter.bind(this, item)}>{item}</DropdownItem>);
+         const dropdownItems = this.props.possibleFilters.map(item => <DropdownItem key={item.id} onClick={this.setFilter.bind(this, item.id)}>{item.val}</DropdownItem>);
         return (
              <Row className="book-list-filter" >
                 <Col xs="12" sm="6">
                     <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                         <DropdownToggle caret>
-                        Filter by: {this.state.filter}
+                        Filter by: {this.props.filter.val}
                         </DropdownToggle>
                         <DropdownMenu>{dropdownItems}</DropdownMenu>
                     </Dropdown>
@@ -53,3 +52,5 @@ export default class BooksFilter extends Component {
         )
     }
 }
+
+export default connect(null)(BooksFilter);

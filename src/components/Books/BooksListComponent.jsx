@@ -8,18 +8,20 @@ import NewBook from './NewBookComponent.jsx'
 import StatusFilter from '../Filter/StatusFilterComponent.jsx';
 import { connect } from 'react-redux';
 
-
-
 require('./booklist.css');
 
 const mapStateToProps = (state) => ({
-  items: state
-  
+  items: state  
 })
 
 class ExactList extends Component{
      render() {
-        const listItems = this.props.items.books.map((book, index) =>  
+         console.log(this.props.items)
+        
+        const possibleFilters = this.props.items.visibilityFilter.filters;
+        const filteredBy = this.props.items.visibilityFilter.active||possibleFilters[0];
+        const books = (filteredBy.id) ? this.props.items.books.filter(book => book.status === filteredBy.id) : this.props.items.books;
+        const listItems = books.map((book, index) =>  
             <ListGroupItem key={index}>
                 <BookListItem {...book}/>
             </ListGroupItem>
@@ -35,7 +37,7 @@ class ExactList extends Component{
                         </Button>
                     </Col>
                     <Col xs="12">
-                        <StatusFilter filter={this.props.items.visibilityFilter}/>                                                                           
+                        <StatusFilter possibleFilters={possibleFilters} filter={filteredBy}/>                                                                           
                         <ListGroup className="book-list-items">{listItems}</ListGroup>
                     </Col>
                 </Row>
@@ -45,8 +47,7 @@ class ExactList extends Component{
 
 
 class BooksList extends Component {
-    render() {
-       
+    render() {       
         return (
              <Switch>
                 <Route exact path='/books/' render={(props) => <ExactList {...props} items={this.props.items}/>}/>             

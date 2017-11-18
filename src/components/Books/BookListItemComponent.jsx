@@ -10,7 +10,7 @@ export default class BookListItem extends Component {
                 <Col xs="8" sm="10">
                     <Link to={`/books/${this.props.id}`}>{this.props.title}</Link> by <Link to={`/author/${this.props.author}`}>{this.props.author}</Link>
                  </Col>
-                <Col xs="4" sm="2">{this.props.status===1 ? 'not started': this.props.status === 2 ? 'in progress': 'read'} </Col>
+                <Col xs="4" sm="2">{this.props.status===1 ? 'not started': this.props.status === 2 ? 'in progress': 'finished'} </Col>
             </Row>         
         )
     }

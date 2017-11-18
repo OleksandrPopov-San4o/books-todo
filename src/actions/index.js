@@ -14,7 +14,7 @@ export const setVisibilityFilter = filter => {
     }
 }
 
-export const toggleTodo = (id, status) => {
+export const changeBookStatus = (id, status) => {
     return {
         type: 'CHANGE_STATUS',
         id,
