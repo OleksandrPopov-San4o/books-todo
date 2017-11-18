@@ -5,12 +5,13 @@
     {val: 'Finished', id:3}]
 
 const visibilityFilter = (state={}, action) => {
-    console.log('filter', state)
     switch (action.type) {
         case 'SET_VISIBILITY_FILTER':
-            return {filters, active:filters.find(f=> f.id === action.filter)}
+            return {filters, search:state.search || '', active:filters.find(f=> f.id === action.filter)}
+        case 'SET_SEARCH_QUERY':
+            return {filters, search:action.search, active: state.active || filters[0]}
         default:
-            return {filters, active: state.active || filters[0]}
+            return {filters, search:state.search || '', active: state.active || filters[0]}
     }
 }
 

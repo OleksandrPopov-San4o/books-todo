@@ -14,6 +14,11 @@ export const setVisibilityFilter = filter => {
     }
 }
 
+export const setSearchQuery = str => ({ 
+    type: 'SET_SEARCH_QUERY',
+    search: str
+})
+
 export const changeBookStatus = (id, status) => {
     return {
         type: 'CHANGE_STATUS',

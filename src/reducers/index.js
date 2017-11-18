@@ -4,7 +4,7 @@ import visibilityFilter from './visibilityFilter'
 
 const bookApp = combineReducers({
     books,
-    visibilityFilter
+    visibilityFilter   
 })
 
 export default bookApp

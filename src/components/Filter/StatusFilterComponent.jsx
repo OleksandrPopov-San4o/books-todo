@@ -2,13 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import {Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupButton, Input, Button} from 'reactstrap';
 import { connect } from 'react-redux';
-import { setVisibilityFilter } from '../../actions';
-
-const possiblefilters = [
-    {val:'Show All', id:0},
-    {val: 'Not started', id:1},
-    {val :'In progress', id:2},
-    {val: 'Finished', id:3}];
+import { setVisibilityFilter, setSearchQuery } from '../../actions';
 
 class BooksFilter extends Component {
     constructor(props) {
@@ -17,7 +11,8 @@ class BooksFilter extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             dropdownOpen: false,
-            filter: ''
+            filter: '',
+            search: this.props.search
         };
   }
 
@@ -26,9 +21,21 @@ class BooksFilter extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+  
   setFilter(item) {
-      this.props.dispatch(setVisibilityFilter(item));
-      
+      this.props.dispatch(setVisibilityFilter(item));      
+  }
+  
+  handleChange(evt) {      
+     this.setState({
+        search: evt.target.value
+    });
+    if (!evt.target.value && this.props.search.length) {
+           this.props.dispatch(setSearchQuery(''));
+      }
+  }
+  search(str) {
+        this.props.dispatch(setSearchQuery(str));
   }
     render() {
          const dropdownItems = this.props.possibleFilters.map(item => <DropdownItem key={item.id} onClick={this.setFilter.bind(this, item.id)}>{item.val}</DropdownItem>);
@@ -44,8 +51,10 @@ class BooksFilter extends Component {
                 </Col>
                 <Col xs="12" sm="6">
                     <InputGroup>
-                        <Input placeholder="Type word to search" />
-                        <InputGroupButton><Button color="secondary">Search</Button></InputGroupButton>
+                        <Input placeholder="Type word to search" value={this.state.search} onChange={evt => this.handleChange(evt)}/>
+                        <InputGroupButton>
+                            <Button color="secondary" onClick={this.search.bind(this, this.state.search)}>Search</Button>
+                        </InputGroupButton>
                     </InputGroup>
                 </Col>
             </Row>         

@@ -1,38 +1,24 @@
 import React from 'react';
 import { Component } from 'react';
 import { Row, Col, ButtonGroup, Button} from 'reactstrap';
-import { getBook } from '../../reducers/books.js';
 import { connect } from 'react-redux';
-import { changeBookStatus } from '../../actions';
+import { changeBookStatus} from '../../actions';
 
-const mapStateToProps = (state) => ({
-  books: state.books,
-  filters: state.visibilityFilter.filters  
-})
+const mapStateToProps = (state, ownProps) => ({
+    book: state.books.find(book => book.id ===Number(ownProps.match.params.number)),
+    filters: state.visibilityFilter.filters,
+  });    
 
 class Book extends Component {
-    constructor () {
-        super();        
-        //this.book = this.books.find(b => b.id === Number(this.props.match.params.number));
-        this.changeStatus = this.changeStatus;
-    }
-
     changeStatus(id, status){
        this.props.dispatch(changeBookStatus(id, status))
     }
  
     render() {
-        // TODO get book with redux
-       this.book = this.props.books.find(b => b.id === Number(this.props.match.params.number));
-
-       console.log(this.props)
-       const statusArr = [
-         {val: 'Not started', id:1},
-         {val :'In progress', id:2},
-         {val: 'Finished', id:3}]
-        
+        this.book = this.props.book;
+        const statusArr = this.props.filters.filter(status => status.id > 0);        
         const buttons = statusArr.map((status, index) => <Button  color="success" disabled={this.book.status === status.id} 
-        key={status.id} onClick={this.changeStatus.bind(this, this.book.id, status.id)}>{status.val}</Button>)
+        key={status.id} onClick={this.changeStatus.bind(this, this.book.id, status.id)}>{status.val}</Button>);
 
         return (
              <Row className="book-item">
